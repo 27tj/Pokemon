@@ -1,19 +1,16 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './index.css';
-
-const container = document.getElementById('root');
-const root = createRoot(container);
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./css/index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ApolloProvider } from "@apollo/client";
+import client from "./config/client";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <ApolloProvider client={client}>
       <App />
-    </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 );
 
