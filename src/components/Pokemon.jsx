@@ -1,41 +1,16 @@
 import { useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import stateSelector from "../reduers/selector";
+import store from "../store";
+import { setFavor, increment } from "../reduers/action";
 export default function Pokemon({ pokemon }) {
-  const [userData, setUserData] = useLocalStorage("userData", {});
   const [hover, setHover] = useState(false);
-  const handleClick_heart = (name) => {
-    // createNewUserData();
-    let newData = { ...userData };
-    if (!userData[pokemon.species]) {
-      newData = {
-        ...newData,
-        [pokemon.species]: {
-          ballCount: 0,
-          isFavor: true,
-          number: parseInt(pokemon.num),
-        },
-      };
-    } else {
-      newData[name].isFavor = !newData[name].isFavor;
-    }
-
-    setUserData(newData);
+  const handleClick_heart = (pokemonID) => {
+    console.log(stateSelector(store.getState()));
+    store.dispatch(setFavor(pokemonID));
   };
-  const handleClick_img = (name) => {
-    let newCount = { ...userData };
-    if (!userData[pokemon.species]) {
-      newCount = {
-        ...newCount,
-        [pokemon.species]: {
-          ballCount: 1,
-          isFavor: false,
-          number: parseInt(pokemon.num),
-        },
-      };
-    } else {
-      newCount[name].ballCount = newCount[name].ballCount + 1;
-    }
-    setUserData(newCount);
+  const handleClick_img = (pokemonID) => {
+    store.dispatch(increment(pokemonID));
   };
   const handleHover = () => {
     setHover(!hover);
@@ -50,23 +25,19 @@ export default function Pokemon({ pokemon }) {
             height="20"
           />
           x
-          {!userData[pokemon.species] ? 0 : userData[pokemon.species].ballCount}
+          {!stateSelector(store.getState())[pokemon.num]
+            ? 0
+            : stateSelector(store.getState())[pokemon.num].value}
         </div>
         <div
-          className={
-            !userData[pokemon.species]
-              ? "heart"
-              : userData[pokemon.species].isFavor
-              ? "heart checked"
-              : "heart"
-          }
-          onClick={() => handleClick_heart(pokemon.species)}
+          className={true ? "heart" : false ? "heart checked" : "heart"}
+          onClick={() => handleClick_heart(pokemon.num)}
         >
           <img
             src={
-              !userData[pokemon.species]
+              !true
                 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Heart_icon_red_hollow.svg/2166px-Heart_icon_red_hollow.svg.png"
-                : userData[pokemon.species].isFavor
+                : false
                 ? "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Love_Heart_SVG.svg/2258px-Love_Heart_SVG.svg.png"
                 : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Heart_icon_red_hollow.svg/2166px-Heart_icon_red_hollow.svg.png"
             }
@@ -86,7 +57,7 @@ export default function Pokemon({ pokemon }) {
           height="100"
           onMouseEnter={() => handleHover()}
           onMouseLeave={() => handleHover()}
-          onClick={() => handleClick_img(pokemon.species)}
+          onClick={() => handleClick_img(pokemon.num)}
         />
       </div>
       <div className="text-container">
