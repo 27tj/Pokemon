@@ -1,7 +1,7 @@
 import { useState } from "react";
 import store from "../store";
 import { setFavor, increment } from "../reduers/action";
-
+import stateSelector from "../reduers/selector";
 export default function Test_Page() {
   const state = store.getState();
   const [target, setTarget] = useState(1);
@@ -10,14 +10,13 @@ export default function Test_Page() {
   //   //     <div>
 
   //   //     </div>
-  //   // }
 
   return (
     <div>
       <button
         onClick={() => {
           store.dispatch(increment(target));
-          console.log("+1", store.getState().UserDataReducer);
+          console.log("+1", stateSelector(store.getState()));
         }}
       >
         +1
@@ -34,14 +33,14 @@ export default function Test_Page() {
       <button
         onClick={() => {
           store.dispatch(setFavor(target));
-          console.log("setFavor", store.getState().UserDataReducer);
+          console.log("setFavor", stateSelector(store.getState()));
         }}
       >
         setFavor
       </button>
       <button
         onClick={() => {
-          console.log(state);
+          console.log(stateSelector(store.getState()));
         }}
       >
         check State

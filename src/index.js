@@ -7,7 +7,13 @@ import { ApolloProvider } from "@apollo/client";
 import client from "./config/client";
 import store from "./store";
 import { Provider } from "react-redux";
+import { loadState, saveState } from "./localStorage";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+store.subscribe(() => {
+  saveState(store.getState().UserDataReducer);
+});
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

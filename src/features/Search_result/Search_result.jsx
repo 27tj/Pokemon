@@ -16,7 +16,7 @@ const query = gql`
   }
 `;
 
-export default function Search_result_Page({ userData, setUserData }) {
+export default function Search_result_Page({ userData, Data }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { loading, error, data } = useQuery(query, {
     variables: { pokemon: searchParams.get("pokemon") },

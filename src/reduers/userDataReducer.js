@@ -1,4 +1,6 @@
-const initialState = {};
+import { loadState } from "../localStorage";
+
+const initialState = loadState();
 
 export default function UserDataReducer(state = initialState, action) {
   const newState = Object.assign({}, state);
@@ -10,7 +12,6 @@ export default function UserDataReducer(state = initialState, action) {
           [action.target]: { value: 1, isFavor: false },
         };
         return newState_2;
-        //return (newState[action.target].value = 1);
       } else {
         return {
           ...newState,

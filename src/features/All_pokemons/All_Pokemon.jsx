@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Pokemon from "../../components/Pokemon";
 import useLocalStorage from "../../hooks/useLocalStorage";
+
 const schema = gql`
   query ($pokemonNum: Int!) {
     getPokemonByDexNumber(number: $pokemonNum) {
@@ -19,7 +20,6 @@ const schema = gql`
 
 export default function All_Pokemon() {
   const [num, setNum] = useState(1);
-  const [userData, setUserData] = useLocalStorage("userData", {});
   const { loading, error, data } = useQuery(schema, {
     variables: { pokemonNum: num },
   });
