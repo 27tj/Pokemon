@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import React from "react";
 import Pokemon from "../../components/Pokemon";
 import { gql, useQuery } from "@apollo/client";
@@ -27,13 +27,17 @@ export default function Search_result_Page({ userData, Data }) {
     return (
       <div>
         <div>Pokemon not found</div>
-        <Button variant="contained">Go Back</Button>
+        <Button variant="contained" component={Link} to="/">
+          Go Back
+        </Button>
       </div>
     );
   return (
     <div>
       <Pokemon pokemon={data.getPokemon} />
-      <Button variant="contained"></Button>
+      <Button variant="contained" component={Link} to="/">
+        Go Back
+      </Button>
     </div>
   );
 }

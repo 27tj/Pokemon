@@ -23,7 +23,7 @@ export default function Search() {
         <label htmlFor="search">Search a Pokemon</label>
         <br />
         <input type="text" name="search" />
-        <IconButton>
+        <IconButton type="submit">
           <SearchIcon />
         </IconButton>
       </form>
