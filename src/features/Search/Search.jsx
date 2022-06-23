@@ -1,5 +1,6 @@
 import { useNavigate, createSearchParams } from "react-router-dom";
-import React from "react";
+import { IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 export default function Search() {
   const navigator = useNavigate();
   const handleSubmit = (event) => {
@@ -18,7 +19,9 @@ export default function Search() {
         <label htmlFor="search">Search a Pokemon</label>
         <br />
         <input type="text" name="search" />
-        <button>Submit</button>
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
       </form>
     </div>
   );
