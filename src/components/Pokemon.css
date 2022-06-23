@@ -1,0 +1,70 @@
+#root {
+  width: 100%;
+}
+.outer-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 150px;
+  border: 1px none;
+  box-shadow: 1px 1px 5px gray;
+  display: flex;
+  flex-direction: column;
+}
+div.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+div.name {
+  font-size: 25px;
+}
+.top-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.IMG {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ballCount {
+  display: flex;
+  align-items: center;
+}
+.Search {
+  display: flex;
+  justify-content: center;
+}
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card {
+  padding: 10;
+}
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

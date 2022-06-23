@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "../store";
 import { setFavor, increment } from "../reduers/action";
+import "./Pokemon.css";
 export default function Pokemon({ pokemon }) {
   const [hover, setHover] = useState(false);
   const favorState = useSelector((state) => {
@@ -55,25 +56,29 @@ export default function Pokemon({ pokemon }) {
           />
         </div>
       </div>
-      <div className="img-container">
-        <img
-          src={
-            hover
-              ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1200px-Pok%C3%A9_Ball_icon.svg.png"
-              : pokemon.sprite
-          }
-          width="100"
-          height="100"
-          onMouseEnter={() => handleHover()}
-          onMouseLeave={() => handleHover()}
-          onClick={() => handleClick_img(pokemon.num)}
-        />
-      </div>
-      <div className="text-container">
-        <div className="name">{pokemon.species}</div>
-        <div className="weight">Weight: {pokemon.weight} kg</div>
-        <div className="height">Height: {pokemon.height} m</div>
-        <div className="type">Type: {pokemon.types.join(", ")}</div>
+      <div className="bottom-container">
+        <div className="img-container">
+          <img
+            src={
+              hover
+                ? "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/1200px-Pok%C3%A9_Ball_icon.svg.png"
+                : pokemon.sprite
+            }
+            width="100"
+            height="100"
+            onMouseEnter={() => handleHover()}
+            onMouseLeave={() => handleHover()}
+            onClick={() => handleClick_img(pokemon.num)}
+          />
+        </div>
+        <div className="text-container">
+          <div className="name">
+            {pokemon.species.charAt(0).toUpperCase() + pokemon.species.slice(1)}
+          </div>
+          <div className="weight">Weight: {pokemon.weight} kg</div>
+          <div className="height">Height: {pokemon.height} m</div>
+          <div className="type">Type: {pokemon.types.join(", ")}</div>
+        </div>
       </div>
     </div>
   );

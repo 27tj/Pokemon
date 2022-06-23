@@ -1,33 +1,28 @@
 import React from "react";
 import { useState } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import Pokemon from "../../components/Pokemon";
 import { useSelector } from "react-redux";
+import { Grid, CircularProgress } from "@mui/material";
+import { GET_BY_DEXMUMBER } from "../../config/GQL_QUERY";
+import { v4 as uuidv4 } from "uuid";
+import "./favorite.css";
 export default function Favorite_Page() {
   const tmp_data = useSelector((state) => state.UserDataReducer);
   const collection = [];
   // Comment: Move the graphql out of the component.
-  const schema = gql`
-    query ($pokemonNum: Int!) {
-      getPokemonByDexNumber(number: $pokemonNum) {
-        num
-        species
-        types
-        weight
-        color
-        sprite
-        height
-      }
-    }
-  `;
+
   // Comment: You should put the following query inside the pokemon component.
   const RenderFavor = ({ num }) => {
-    const { loading, error, data } = useQuery(schema, {
+    const { loading, data } = useQuery(GET_BY_DEXMUMBER, {
       variables: { pokemonNum: num },
     });
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-    return <Pokemon pokemon={data.getPokemonByDexNumber} />;
+    if (loading) return <CircularProgress />;
+    return (
+      <div className="flex-item">
+        <Pokemon pokemon={data.getPokemonByDexNumber} />
+      </div>
+    );
   };
   // Comment: Put this function into useEffect();
   for (let [key, value] of Object.entries(tmp_data)) {
@@ -35,7 +30,20 @@ export default function Favorite_Page() {
       collection.push(key);
     }
   }
-  return collection.map((item) => (
-    <RenderFavor key={item} num={parseInt(item)} />
-  ));
+  return (
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="grid-container">
+        {collection.map((item) => (
+          <RenderFavor key={uuidv4()} num={parseInt(item)} />
+        ))}
+      </div>
+    </Grid>
+  );
 }
