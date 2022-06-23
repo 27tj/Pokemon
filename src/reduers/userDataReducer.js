@@ -1,11 +1,13 @@
-import { loadState } from "../localStorage";
+import { loadState } from '../localStorage';
 
+// Comment: You should load the data stored in local storage in store not here.
+// Here you define the default value of the state.
 const initialState = loadState();
 
 export default function UserDataReducer(state = initialState, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
-    case "increment":
+    case 'increment':
       if (!newState[action.target]) {
         const newState_2 = {
           ...newState,
@@ -21,7 +23,13 @@ export default function UserDataReducer(state = initialState, action) {
           },
         };
       }
+<<<<<<< HEAD
     case "setFavor":
+=======
+      // Comment: Remove the break.
+      break;
+    case 'setFavor':
+>>>>>>> b3981d6f1bb8904e43f65996fadefb9666254370
       if (!newState[action.target]) {
         const newState_2 = {
           ...newState,

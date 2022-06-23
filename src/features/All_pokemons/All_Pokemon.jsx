@@ -4,6 +4,8 @@ import Pokemon from "../../components/Pokemon";
 import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
+// Comment: Add the function name after query.
 const schema = gql`
   query ($pokemonNum: Int!) {
     getPokemonByDexNumber(number: $pokemonNum) {
@@ -32,6 +34,7 @@ export default function All_Pokemon() {
       </form>
       <IconButton
         onClick={() => {
+          // Comment: the ternary can be put inside setNum.
           num > 1 ? setNum(num - 1) : setNum(1);
         }}
       >
