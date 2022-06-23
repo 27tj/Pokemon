@@ -21,7 +21,6 @@ export default function UserDataReducer(state = initialState, action) {
           },
         };
       }
-      break;
     case "setFavor":
       if (!newState[action.target]) {
         const newState_2 = {

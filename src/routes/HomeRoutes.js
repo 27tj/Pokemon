@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Search from "../features/Search/Search";
 import Favorite_Page from "../features/Favorite/Favorite_Page";
 import Search_result from "../features/Search_result/Search_result";

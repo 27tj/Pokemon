@@ -1,7 +1,9 @@
-import { gql, useQuery, query } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
 import Pokemon from "../../components/Pokemon";
-
+import { IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 const schema = gql`
   query ($pokemonNum: Int!) {
     getPokemonByDexNumber(number: $pokemonNum) {
@@ -28,17 +30,19 @@ export default function All_Pokemon() {
       <form>
         <input />
       </form>
-      <button
+      <IconButton
         onClick={() => {
           num > 1 ? setNum(num - 1) : setNum(1);
         }}
       >
-        previous
-      </button>
+        <ArrowBackIcon />
+      </IconButton>
       <div>
         <Pokemon pokemon={data.getPokemonByDexNumber} />
       </div>
-      <button onClick={() => setNum(num + 1)}>Next</button>
+      <IconButton onClick={() => setNum(num + 1)}>
+        <ArrowForwardIcon />
+      </IconButton>
     </div>
   );
 }
