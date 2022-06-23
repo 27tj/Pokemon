@@ -1,15 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
 import { gql, useQuery } from "@apollo/client";
 import Pokemon from "../../components/Pokemon";
-import store from "../../store";
-import stateSelector from "../../reduers/selector";
+import { useSelector } from "react-redux";
 export default function Favorite_Page() {
-  const [userData, setUserData] = useLocalStorage("userData", {});
-  //const data = Object.entries({ ...userData }).map((e) => ({ [e[0]]: e[1] }));
-  const tmp_data = { ...stateSelector(store.getState()) };
-  console.log(Object.entries(tmp_data));
+  const tmp_data = useSelector((state) => state.UserDataReducer);
   const collection = [];
   const schema = gql`
     query ($pokemonNum: Int!) {
@@ -33,10 +28,11 @@ export default function Favorite_Page() {
     return <Pokemon pokemon={data.getPokemonByDexNumber} />;
   };
   for (let [key, value] of Object.entries(tmp_data)) {
-    console.log(value.isFavor);
-    // if (value.isFavor) {
-    //   collection.push(tmp_data[key].number);
-    // }
+    if (value.isFavor) {
+      collection.push(key);
+    }
   }
-  return collection.map((item) => <RenderFavor key={item} num={item} />);
+  return collection.map((item) => (
+    <RenderFavor key={item} num={parseInt(item)} />
+  ));
 }

@@ -1,6 +1,5 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import React from "react";
-import { useState } from "react";
 import Pokemon from "../../components/Pokemon";
 import { gql, useQuery } from "@apollo/client";
 const query = gql`

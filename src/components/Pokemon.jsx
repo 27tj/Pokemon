@@ -5,17 +5,17 @@ import { setFavor, increment } from "../reduers/action";
 export default function Pokemon({ pokemon }) {
   const [hover, setHover] = useState(false);
   const favorState = useSelector((state) => {
-    try {
+    if (state.UserDataReducer[pokemon.num] === undefined) {
+      return false;
+    } else {
       return state.UserDataReducer[pokemon.num].isFavor;
-    } catch (err) {
-      return null;
     }
   });
   const count = useSelector((state) => {
-    try {
+    if (state.UserDataReducer[pokemon.num] === undefined) {
+      return 0;
+    } else {
       return state.UserDataReducer[pokemon.num].value;
-    } catch (err) {
-      return null;
     }
   });
   const handleClick_heart = (pokemonID) => {
@@ -36,12 +36,10 @@ export default function Pokemon({ pokemon }) {
             width="20"
             height="20"
           />
-          x{!count ? 0 : count}
+          x {count}
         </div>
         <div
-          className={
-            !favorState ? "heart" : favorState ? "heart checked" : "heart"
-          }
+          className={favorState ? "heart checked" : "heart"}
           onClick={() => handleClick_heart(pokemon.num)}
         >
           <img

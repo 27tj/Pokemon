@@ -1,8 +1,6 @@
 import { gql, useQuery, query } from "@apollo/client";
-import React, { useEffect } from "react";
 import { useState } from "react";
 import Pokemon from "../../components/Pokemon";
-import useLocalStorage from "../../hooks/useLocalStorage";
 
 const schema = gql`
   query ($pokemonNum: Int!) {
