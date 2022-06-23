@@ -2,6 +2,7 @@ import { gql, useQuery, query } from "@apollo/client";
 import { useState } from "react";
 import Pokemon from "../../components/Pokemon";
 
+// Comment: Add the function name after query.
 const schema = gql`
   query ($pokemonNum: Int!) {
     getPokemonByDexNumber(number: $pokemonNum) {
@@ -30,6 +31,7 @@ export default function All_Pokemon() {
       </form>
       <button
         onClick={() => {
+          // Comment: the ternary can be put inside setNum.
           num > 1 ? setNum(num - 1) : setNum(1);
         }}
       >
@@ -38,6 +40,7 @@ export default function All_Pokemon() {
       <div>
         <Pokemon pokemon={data.getPokemonByDexNumber} />
       </div>
+      {/* Comment: When your state is depend on the previous state, put it into a function. */}
       <button onClick={() => setNum(num + 1)}>Next</button>
     </div>
   );
